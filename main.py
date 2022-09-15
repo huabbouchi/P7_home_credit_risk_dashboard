@@ -167,13 +167,13 @@ with descriptive:
                     y=dash_df[dash_df.index==id].AMT_CREDIT.values[0], color='firebrick')
         st.pyplot(fig)
 
-    with pos_2:
-        fig, ax = plt.subplots()
-        splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['DAYS_EMPLOYED'])
-        splot.set(xscale="log", yscale="log")
-        plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
-                    y=dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0], color='firebrick')
-        st.pyplot(fig)
+    # with pos_2:
+    #     fig, ax = plt.subplots()
+    #     splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['DAYS_EMPLOYED'])
+    #     splot.set(xscale="log", yscale="log")
+    #     plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
+    #                 y=dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0], color='firebrick')
+    #     st.pyplot(fig)
 
     with pos_3:
         fig, ax = plt.subplots()
