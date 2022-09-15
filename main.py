@@ -153,11 +153,11 @@ with descriptive:
         plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0],ymax=0.95,color='firebrick', ls='--')
         st.pyplot(fig)
 
-    with pos_3:
-        fig, ax = plt.subplots()
-        sns.kdeplot(dash_df['AMT_CREDIT'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
-        plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0],ymax=0.95,color='firebrick', ls='--')
-        st.pyplot(fig)
+    # with pos_3:
+    #     fig, ax = plt.subplots()
+    #     sns.kdeplot(dash_df['AMT_CREDIT'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
+    #     plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0],ymax=0.95,color='firebrick', ls='--')
+    #     st.pyplot(fig)
 
     with pos_1:
         fig, ax = plt.subplots()
