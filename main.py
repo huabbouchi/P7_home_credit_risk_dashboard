@@ -117,9 +117,9 @@ with descriptive:
     with st.container(): 
         c1.write('**Organization** : '+str(dash_df[dash_df.index==id].ORGANIZATION_TYPE.values[0]))
         c2.write('**Employment duration** : ' + str(dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0].round())+ ' years')
-        c3.write('**Total income** : ' + str(dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0]) + ' US $')
+        c3.write('**Total income** : ' + str(dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0]) + ' USD')
         c4.write("**Loan Type** : " + str(dash_df[dash_df.index==id].NAME_CONTRACT_TYPE.values[0]))
-        c5.write('**Loan amount** : ' + str(dash_df[dash_df.index==id].AMT_CREDIT.values[0]) + ' US $')
+        c5.write('**Loan amount** : ' + str(dash_df[dash_df.index==id].AMT_CREDIT.values[0]) + ' USD')
     
     pos_1, pos_2, pos_3 = st.columns(3)
     
@@ -153,11 +153,11 @@ with descriptive:
         plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0],ymax=0.95,color='firebrick', ls='--')
         st.pyplot(fig)
 
-    # with pos_3:
-    #     fig, ax = plt.subplots()
-    #     sns.kdeplot(dash_df['AMT_CREDIT'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
-    #     plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0],ymax=0.95,color='firebrick', ls='--')
-    #     st.pyplot(fig)
+    with pos_3:
+        fig, ax = plt.subplots()
+        sns.kdeplot(dash_df['AMT_CREDIT'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
+        plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0],ymax=0.95,color='firebrick', ls='--')
+        st.pyplot(fig)
 
     with pos_1:
         fig, ax = plt.subplots()
@@ -167,13 +167,13 @@ with descriptive:
                     y=dash_df[dash_df.index==id].AMT_CREDIT.values[0], color='firebrick')
         st.pyplot(fig)
 
-    # with pos_2:
-    #     fig, ax = plt.subplots()
-    #     splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['DAYS_EMPLOYED'])
-    #     splot.set(xscale="log", yscale="log")
-    #     plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
-    #                 y=dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0], color='firebrick')
-    #     st.pyplot(fig)
+    with pos_2:
+        fig, ax = plt.subplots()
+        splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['DAYS_EMPLOYED'])
+        splot.set(xscale="log", yscale="log")
+        plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
+                    y=dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0], color='firebrick')
+        st.pyplot(fig)
 
     with pos_3:
         fig, ax = plt.subplots()
