@@ -39,7 +39,7 @@ def load_data():
     z2 = ZipFile("data/HomeCredit_columns_description.zip")
     description_df = pd.read_csv(z2.open('HomeCredit_columns_description.csv'),encoding = "ISO-8859-1", engine='python')
         
-    logo = imread("pret_logo.png")
+    logo = imread("data/pret_logo.png")
 
 
     return X_dashboard, dash_df, description_df, logo
