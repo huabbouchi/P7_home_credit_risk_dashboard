@@ -124,55 +124,64 @@ with descriptive:
     pos_1, pos_2, pos_3 = st.columns(3)
     
     with pos_1:
+        fig, ax = plt.subplots()
         sns.kdeplot(dash_df['DAYS_BIRTH'], label = 'Age', hue=dash_df['CODE_GENDER']) #log_scale=True, 
         plt.axvline(x=dash_df[dash_df.index==id].DAYS_BIRTH.values[0],ymax=0.95,color='firebrick', ls='--')
-        st.pyplot()
+        st.pyplot(fig)
 
     with pos_2:
+        fig, ax = plt.subplots()
         sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
         plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0],ymax=0.95,color='firebrick', ls='--')
-        st.pyplot()
+        st.pyplot(fig)
 
     with pos_3:
+        fig, ax = plt.subplots()
         sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['NAME_EDUCATION_TYPE'],)
         plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0],ymax=0.95,color='firebrick', ls='--')
-        st.pyplot()
+        st.pyplot(fig)
 
     with pos_1:
+        fig, ax = plt.subplots()
         sns.kdeplot(dash_df['AMT_CREDIT'], label = 'Loan amount', log_scale=True, hue=dash_df['NAME_CONTRACT_TYPE'])
         plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0],ymax=0.95,color='firebrick', ls='--')
-        st.pyplot()
+        st.pyplot(fig)
 
     with pos_2:
+        fig, ax = plt.subplots()
         sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['FLAG_OWN_CAR'],)
         plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0],ymax=0.95,color='firebrick', ls='--')
-        st.pyplot()
+        st.pyplot(fig)
 
     with pos_3:
+        fig, ax = plt.subplots()
         sns.kdeplot(dash_df['AMT_CREDIT'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
         plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0],ymax=0.95,color='firebrick', ls='--')
-        st.pyplot()
+        st.pyplot(fig)
 
     with pos_1:
+        fig, ax = plt.subplots()
         splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['AMT_CREDIT'])
         splot.set(xscale="log", yscale="log")
         plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
                     y=dash_df[dash_df.index==id].AMT_CREDIT.values[0], color='firebrick')
-        st.pyplot()
+        st.pyplot(fig)
 
     with pos_2:
+        fig, ax = plt.subplots()
         splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['DAYS_EMPLOYED'])
         splot.set(xscale="log", yscale="log")
         plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
                     y=dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0], color='firebrick')
-        st.pyplot()
+        st.pyplot(fig)
 
     with pos_3:
+        fig, ax = plt.subplots()
         splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['NAME_EDUCATION_TYPE'])
         splot.set(xscale="log")
         plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
                     y=dash_df[dash_df.index==id].NAME_EDUCATION_TYPE.values[0], color='firebrick')
-        st.pyplot()    
+        st.pyplot(fig)    
     # with pos_2:
 
     #     fig = xp.histogram(data_frame=dash_df, x='DAYS_BIRTH', color='CODE_GENDER',nbins=10,)
@@ -304,11 +313,12 @@ with intrepretation:
             pos = pos_3 if (i-3*(i//3))==2  else pos_2 if (i-3*(i//3))==1 else pos_1
             
             with pos:
+                fig, ax = plt.subplots()
                 sns.kdeplot(X_similar[options[i]][X_similar['proba']>th],color='red', label='Target=1')
                 sns.kdeplot(X_similar[options[i]][X_similar['proba']<th],color='green', label='Target=0')
                 plt.axvline(x=X_similar.loc[idx_client, options[i]].values[0], ymax=0.95, color='black', ls='--', label='customer')
                 plt.legend()
-                st.pyplot()
+                st.pyplot(fig)
 
 
         # st.write('You selected:', X_similar.loc[idx_client, options[0]].values[0])
