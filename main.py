@@ -16,7 +16,7 @@ from zipfile import ZipFile
 from sklearn.cluster import KMeans
 from sklearn.neighbors import NearestNeighbors
 
-#st.set_page_config(layout="wide")
+st.set_page_config(layout="wide")
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 ###########################################################################################################################
