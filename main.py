@@ -17,6 +17,7 @@ from sklearn.cluster import KMeans
 from sklearn.neighbors import NearestNeighbors
 
 #st.set_page_config(layout="wide")
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 ###########################################################################################################################
 ###########################################################################################################################
@@ -126,37 +127,37 @@ with descriptive:
     with pos_1:
         fig, ax = plt.subplots()
         sns.kdeplot(dash_df['DAYS_BIRTH'], label = 'Age', hue=dash_df['CODE_GENDER']) #log_scale=True, 
-        plt.axvline(x=dash_df[dash_df.index==id].DAYS_BIRTH.values[0],ymax=0.95,color='firebrick', ls='--')
+        plt.axvline(x=dash_df[dash_df.index==id].DAYS_BIRTH.values[0], ymax=0.95, color='firebrick', ls='--')
         st.pyplot(fig)
 
     with pos_2:
         fig, ax = plt.subplots()
         sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
-        plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0],ymax=0.95,color='firebrick', ls='--')
+        plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], ymax=0.95, color='firebrick', ls='--')
         st.pyplot(fig)
 
     with pos_3:
         fig, ax = plt.subplots()
         sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['NAME_EDUCATION_TYPE'],)
-        plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0],ymax=0.95,color='firebrick', ls='--')
+        plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], ymax=0.95, color='firebrick', ls='--')
         st.pyplot(fig)
 
     with pos_1:
         fig, ax = plt.subplots()
         sns.kdeplot(dash_df['AMT_CREDIT'], label = 'Loan amount', log_scale=True, hue=dash_df['NAME_CONTRACT_TYPE'])
-        plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0],ymax=0.95,color='firebrick', ls='--')
+        plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0], ymax=0.95, color='firebrick', ls='--')
         st.pyplot(fig)
 
     with pos_2:
         fig, ax = plt.subplots()
         sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['FLAG_OWN_CAR'],)
-        plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0],ymax=0.95,color='firebrick', ls='--')
+        plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], ymax=0.95, color='firebrick', ls='--')
         st.pyplot(fig)
 
     with pos_3:
         fig, ax = plt.subplots()
         sns.kdeplot(dash_df['AMT_CREDIT'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
-        plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0],ymax=0.95,color='firebrick', ls='--')
+        plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0], ymax=0.95, color='firebrick', ls='--')
         st.pyplot(fig)
 
     with pos_1:
@@ -275,7 +276,7 @@ with intrepretation:
         
 
         
-        st.set_option('deprecation.showPyplotGlobalUse', False)
+        #st.set_option('deprecation.showPyplotGlobalUse', False)
 
         ### Global interortation ###
         original_title = '<p style="font-size: 20px;text-align: left; color:green;"> Global Interpretation: </p>'
