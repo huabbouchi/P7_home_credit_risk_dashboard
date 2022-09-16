@@ -286,8 +286,9 @@ with intrepretation:
         #shap.summary_plot(shap_values, X_dashboard.astype("float"), max_display=feature_number )
         #st.pyplot()
         #summary_plot_bar
+        fig, ax = plt.subplots()
         shap.summary_plot(shap_values, X_dashboard, plot_type="bar", max_display=feature_number )
-        st.pyplot()
+        st.pyplot(fig)
 
 
         ##################################
