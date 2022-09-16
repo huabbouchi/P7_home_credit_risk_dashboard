@@ -348,10 +348,11 @@ with intrepretation:
             st_shap(shap.force_plot(exp_value, shap_values[idx_client], features = X_dashboard.iloc[idx_client], feature_names=X_dashboard.columns, figsize=(12,5)))
 
             #waterfall_plot
+            fig, ax = plt.subplots()
             shap.waterfall_plot(shap.Explanation(values=shap_values[idx_client.values[0]], 
             base_values=exp_value, data=X_dashboard.iloc[idx_client.values[0]],  
             feature_names=X_dashboard.columns.tolist()))
-            st.pyplot()
+            st.pyplot(fig)
 
 
 ###########################################################################################################################
