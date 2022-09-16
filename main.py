@@ -283,8 +283,12 @@ with intrepretation:
         st.markdown(original_title, unsafe_allow_html=True)
 
         #summary_plot
-        shap.summary_plot(shap_values, X_dashboard.astype("float"), max_display=feature_number )
+        #shap.summary_plot(shap_values, X_dashboard.astype("float"), max_display=feature_number )
+        #st.pyplot()
+        #summary_plot_bar
+        shap.summary_plot(shap_values, X_dashboard, plot_type="bar", max_display=feature_number )
         st.pyplot()
+
 
         ##################################
         # features description select list 
