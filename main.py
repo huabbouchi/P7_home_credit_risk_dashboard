@@ -183,11 +183,6 @@ with descriptive:
         plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
                     y=dash_df[dash_df.index==id].NAME_EDUCATION_TYPE.values[0], color='firebrick')
         st.pyplot(fig)    
-    # with pos_2:
-
-    #     fig = xp.histogram(data_frame=dash_df, x='DAYS_BIRTH', color='CODE_GENDER',nbins=10,)
-    #     fig.add_vline(x=dash_df[dash_df.index==id].DAYS_BIRTH.values[0].round(), line_dash = 'dash', line_color = 'firebrick')
-    #     st.plotly_chart(fig)
 
 ###########################################################################################################################    
 ###########################################################################################################################
@@ -267,7 +262,7 @@ with intrepretation:
         #(same syntax works for LightGBM, CatBoost, scikit-learn and spark models)
         @st.cache
         def load_data_1():
-            explainer = shap.TreeExplainer(model)
+            explainer = shap.Explainer(model)
             shap_values = explainer.shap_values(X_dashboard)[0]
             exp_value=explainer.expected_value[0]
             return explainer, shap_values, exp_value
@@ -283,8 +278,10 @@ with intrepretation:
         st.markdown(original_title, unsafe_allow_html=True)
 
         #summary_plot
-        #shap.summary_plot(shap_values, X_dashboard.astype("float"), max_display=feature_number )
-        #st.pyplot()
+        fig, ax = plt.subplots()
+        shap.summary_plot(shap_values, X_dashboard.astype("float"), max_display=feature_number )
+        st.pyplot(fig)
+
         #summary_plot_bar
         fig, ax = plt.subplots()
         shap.summary_plot(shap_values, X_dashboard, plot_type="bar", max_display=feature_number )
