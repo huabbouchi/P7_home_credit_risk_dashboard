@@ -267,14 +267,14 @@ with intrepretation:
     
         #explain the model's predictions using SHAP
         #(same syntax works for LightGBM, CatBoost, scikit-learn and spark models)
-        @st.cache
-        def load_data_1():
-            explainer = shap.Explainer(model)
-            shap_values = explainer.shap_values(X_dashboard)[0]
-            exp_value=explainer.expected_value[0]
-            return explainer, shap_values, exp_value
+        # @st.cache
+        # def load_data_1():
+        explainer = shap.Explainer(model)
+        shap_values = explainer.shap_values(X_dashboard)[0]
+        exp_value=explainer.expected_value[0]
+        #     return explainer, shap_values, exp_value
 
-        explainer, shap_values, exp_value = load_data_1()
+        # explainer, shap_values, exp_value = load_data_1()
         
 
         
