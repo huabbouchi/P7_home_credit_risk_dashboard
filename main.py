@@ -52,25 +52,28 @@ X_dashboard, dash_df, description_df, logo = load_data()
 st.sidebar.image(logo)
 selection = st.sidebar.radio("Please select your scoring model", ['AUC_Score', 'Bank_Score', 'Fbeta_Score'])
 if selection=="AUC_Score":
+    th = 0.45
     st.sidebar.markdown('***')
-    original_title = '<p style="font-size: 20px; color:Blue; text-align: left "> AUC_Score Selected:\nThreshold of payment dificulty=0.525 </p>'
+    original_title = '<p style="font-size: 20px; color:Blue; text-align: left "> AUC_Score Selected:\nThreshold of payment dificulty= {} </p>'.format(th)
     st.sidebar.markdown(original_title, unsafe_allow_html=True)
     model = pickle.load(open('LGBMClassifier_auc_score.pkl', 'rb'))
-    th = 0.525
+    
 
 elif selection=="Bank_Score":
+    th = 0.525
     st.sidebar.markdown('***')
-    original_title = '<p style="font-size: 20px; color:Blue; text-align: left "> Bank_Score Selected:\nThreshold of payment dificulty=0.55 </p>'
+    original_title = '<p style="font-size: 20px; color:Blue; text-align: left "> Bank_Score Selected:\nThreshold of payment dificulty= {} </p>'.format(th)
     st.sidebar.markdown(original_title, unsafe_allow_html=True)
     model = pickle.load(open('LGBMClassifier_bank_score.pkl', 'rb'))
-    th = 0.55
+    
 
 elif selection=="Fbeta_Score":
+    th = 0.375
     st.sidebar.markdown('***')
-    original_title = '<p style="font-size: 20px; color:Blue; text-align: left "> F-beta_Score Selected:\nThreshold of payment dificulty=0.425 </p>'
+    original_title = '<p style="font-size: 20px; color:Blue; text-align: left "> F-beta_Score Selected:\nThreshold of payment dificulty= {} </p>'.format(th)
     st.sidebar.markdown(original_title, unsafe_allow_html=True)
     model = pickle.load(open('LGBMClassifier_fbeta_score.pkl', 'rb'))
-    th = 0.425
+    
 
 st.sidebar.markdown('***')
 
