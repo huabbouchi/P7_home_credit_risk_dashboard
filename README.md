@@ -53,6 +53,7 @@ Prêt à dépenser décide donc de développer **un dashboard interactif** pour 
 * Permettre de visualiser le score et l’interprétation de ce score pour chaque client de façon intelligible pour une personne non experte en data science.
 * Permettre de visualiser des informations descriptives relatives à un client (via un système de filtre).
 * Permettre de comparer les informations descriptives relatives à un client à l’ensemble des clients ou à un groupe de clients similaires.
+<<<<<<< HEAD
 
 <br>
 
@@ -60,3 +61,5 @@ Prêt à dépenser décide donc de développer **un dashboard interactif** pour 
 ## <a name="C2">Lien</a>
 ***
 Pour accèder au Dashboard S.V.P appuyer [ici](https://huabbouchi-p7-home-credit-risk-dashboard-main-9dpela.streamlitapp.com/)
+=======
+>>>>>>> a3f4b04e6461a3f97ffd21a233781cbb8be3a20b
