@@ -1,4 +1,7 @@
-# Projet 7: Implémentez un modèle de scoring
+<p align="center"> 
+# Implémentez un modèle de scoring
+</p>   
+ 
 <br>
 <p align="center"> 
     <img src="pictures/logo_openclassrooms.png" width="200" alt="data scientist logo"  />
