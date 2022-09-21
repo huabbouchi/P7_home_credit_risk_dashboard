@@ -1,4 +1,4 @@
-# Projet 7: Implémentez un modèle de scoring
+# Implémentez un modèle de scoring
 <br>
 <p align="center"> 
     <img src="pictures/logo_openclassrooms.png" width="200" alt="data scientist logo"  />
@@ -16,6 +16,9 @@
     - <a href="#C1.1">Mission</a>
 
     - <a href="#C1.2">Spécifications du dashboard</a>
+
+- <a href="#C2">Lien</a>
+
 <br>
 
 ***
@@ -50,3 +53,10 @@ Prêt à dépenser décide donc de développer **un dashboard interactif** pour 
 * Permettre de visualiser le score et l’interprétation de ce score pour chaque client de façon intelligible pour une personne non experte en data science.
 * Permettre de visualiser des informations descriptives relatives à un client (via un système de filtre).
 * Permettre de comparer les informations descriptives relatives à un client à l’ensemble des clients ou à un groupe de clients similaires.
+
+<br>
+
+***
+## <a name="C2">Lien</a>
+***
+Pour accèder au Dashboard S.V.P appuyer [ici](https://huabbouchi-p7-home-credit-risk-dashboard-main-9dpela.streamlitapp.com/)
