@@ -1,6 +1,5 @@
-<p align="center"> 
 # Implémentez un modèle de scoring
-</p>   
+  
  
 <br>
 <p align="center"> 
