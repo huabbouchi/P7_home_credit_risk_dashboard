@@ -12,19 +12,20 @@ import shap
 import plotly.graph_objects as go
 from matplotlib.image import imread
 from zipfile import ZipFile
+import matplotlib
 
 from sklearn.cluster import KMeans
 from sklearn.neighbors import NearestNeighbors
 
-st.set_page_config(layout="wide")
+# st.set_page_config(layout="wide")
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 ###########################################################################################################################
 ###########################################################################################################################
 header = st.container()
 customer = st.container()
-descriptive = st.container()
 score = st.container()
+descriptive = st.container()
 intrepretation = st.container()
 comparaison = st.container()
 
@@ -100,102 +101,6 @@ with customer:
     id = int(id)
 ###########################################################################################################################
 ###########################################################################################################################
-with descriptive:
-
-    st.markdown('***')
-    original_title = '<p style="font-size: 25px; color:Blue; text-align: left "> Customer general informations : </p>'
-    st.markdown(original_title, unsafe_allow_html=True)
-
-    c1, c2, c3, c4, c5 = st.columns(5)
-    with st.container():
-        c1.write('**Gender** :' + str(dash_df[dash_df.index==id].CODE_GENDER.values[0]))
-        c2.write('**Family Status** : ' + str(dash_df[dash_df.index==id].NAME_FAMILY_STATUS.values[0]))
-        c3.write("**Children** : " + str(dash_df[dash_df.index==id].CNT_CHILDREN.values[0]))
-        c4.write('**Age** : ' + str(dash_df[dash_df.index==id].DAYS_BIRTH.values[0].round())+ ' years')
-        c5.write('**Education** : ' + str(dash_df[dash_df.index==id].NAME_EDUCATION_TYPE.values[0]))   
-        st.markdown('')
-
-    c1, c2, c3, c4, c5 = st.columns(5)
-    with st.container(): 
-        c1.write('**Accompanying customer** : '+str(dash_df[dash_df.index==id].NAME_TYPE_SUITE.values[0]))
-        c2.write('**Owning car** : ' + str(dash_df[dash_df.index==id].FLAG_OWN_CAR.values[0]))
-        c3.write('**Owning House** : ' + str(dash_df[dash_df.index==id].FLAG_OWN_REALTY.values[0]))
-        c4.write("**Housing type** : " + str(dash_df[dash_df.index==id].NAME_HOUSING_TYPE.values[0]))
-        c5.write('**Occupation** : ' + str(dash_df[dash_df.index==id].OCCUPATION_TYPE.values[0]))    
-        st.markdown('')
-
-    c1, c2, c3, c4, c5 = st.columns(5)
-    with st.container(): 
-        c1.write('**Organization** : '+str(dash_df[dash_df.index==id].ORGANIZATION_TYPE.values[0]))
-        c2.write('**Employment duration** : ' + str(dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0].round())+ ' years')
-        c3.write('**Total income** : ' + str(dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0]) + ' USD')
-        c4.write("**Loan Type** : " + str(dash_df[dash_df.index==id].NAME_CONTRACT_TYPE.values[0]))
-        c5.write('**Loan amount** : ' + str(dash_df[dash_df.index==id].AMT_CREDIT.values[0]) + ' USD')
-    
-    pos_1, pos_2, pos_3 = st.columns(3)
-    
-    with pos_1:
-        fig, ax = plt.subplots()
-        sns.kdeplot(dash_df['DAYS_BIRTH'], label = 'Age', hue=dash_df['CODE_GENDER']) #log_scale=True, 
-        plt.axvline(x=dash_df[dash_df.index==id].DAYS_BIRTH.values[0], ymax=0.95, color='firebrick', ls='--')
-        st.pyplot(fig)
-
-    with pos_2:
-        fig, ax = plt.subplots()
-        sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
-        plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], ymax=0.95, color='firebrick', ls='--')
-        st.pyplot(fig)
-
-    with pos_3:
-        fig, ax = plt.subplots()
-        sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['NAME_EDUCATION_TYPE'],)
-        plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], ymax=0.95, color='firebrick', ls='--')
-        st.pyplot(fig)
-
-    with pos_1:
-        fig, ax = plt.subplots()
-        sns.kdeplot(dash_df['AMT_CREDIT'], label = 'Loan amount', log_scale=True, hue=dash_df['NAME_CONTRACT_TYPE'])
-        plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0], ymax=0.95, color='firebrick', ls='--')
-        st.pyplot(fig)
-
-    with pos_2:
-        fig, ax = plt.subplots()
-        sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['FLAG_OWN_CAR'],)
-        plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], ymax=0.95, color='firebrick', ls='--')
-        st.pyplot(fig)
-
-    with pos_3:
-        fig, ax = plt.subplots()
-        sns.kdeplot(dash_df['AMT_CREDIT'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
-        plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0], ymax=0.95, color='firebrick', ls='--')
-        st.pyplot(fig)
-
-    with pos_1:
-        fig, ax = plt.subplots()
-        splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['AMT_CREDIT'])
-        splot.set(xscale="log", yscale="log")
-        plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
-                    y=dash_df[dash_df.index==id].AMT_CREDIT.values[0], color='firebrick')
-        st.pyplot(fig)
-
-    with pos_2:
-        fig, ax = plt.subplots()
-        splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['DAYS_EMPLOYED'])
-        splot.set(xscale="log", yscale="log")
-        plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
-                    y=dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0], color='firebrick')
-        st.pyplot(fig)
-
-    with pos_3:
-        fig, ax = plt.subplots()
-        splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['NAME_EDUCATION_TYPE'])
-        splot.set(xscale="log")
-        plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
-                    y=dash_df[dash_df.index==id].NAME_EDUCATION_TYPE.values[0], color='firebrick')
-        st.pyplot(fig)    
-
-###########################################################################################################################    
-###########################################################################################################################
 with score:
     
     X = X_dashboard[X_dashboard.index == id]
@@ -213,7 +118,7 @@ with score:
     original_title = '<p style="font-family:Courier; color:BROWN; font-size:50px; text-align: center;">{}%</p>'.format((probability_default_payment[0]*100).round(2))
     st.markdown(original_title, unsafe_allow_html=True)
 
-    st.markdown('***')    
+    # st.markdown('***')    
     original_title = '<p style="font-size: 25px;text-align: left; color:Blue;"> Conclusion : </p>'
     st.markdown(original_title, unsafe_allow_html=True)
     #st.markdown('***')
@@ -250,6 +155,207 @@ with score:
         st.markdown(original_title, unsafe_allow_html=True)
 
 ###########################################################################################################################
+###########################################################################################################################
+with descriptive:
+
+    st.markdown('***')
+    original_title = '<p style="font-size: 25px; color:Blue; text-align: left "> Customer general informations : </p>'
+    st.markdown(original_title, unsafe_allow_html=True)
+
+    chk_general = st.checkbox("Show Customer Personal Informations ?", value=True)
+
+    if chk_general:
+        
+        c1, c2, c3, c4, c5 = st.columns(5)
+        with st.container():
+            c1.write('**Gender** :' + str(dash_df[dash_df.index==id].CODE_GENDER.values[0]))
+            c2.write('**Family Status** : ' + str(dash_df[dash_df.index==id].NAME_FAMILY_STATUS.values[0]))
+            c3.write("**Children** : " + str(dash_df[dash_df.index==id].CNT_CHILDREN.values[0]))
+            c4.write('**Age** : ' + str(dash_df[dash_df.index==id].DAYS_BIRTH.values[0].round())+ ' years')
+            c5.write('**Education** : ' + str(dash_df[dash_df.index==id].NAME_EDUCATION_TYPE.values[0]))   
+            st.markdown('')
+
+        c1, c2, c3, c4, c5 = st.columns(5)
+        with st.container(): 
+            c1.write('**Accompanying customer** : '+str(dash_df[dash_df.index==id].NAME_TYPE_SUITE.values[0]))
+            c2.write('**Owning car** : ' + str(dash_df[dash_df.index==id].FLAG_OWN_CAR.values[0]))
+            c3.write('**Owning House** : ' + str(dash_df[dash_df.index==id].FLAG_OWN_REALTY.values[0]))
+            c4.write("**Housing type** : " + str(dash_df[dash_df.index==id].NAME_HOUSING_TYPE.values[0]))
+            c5.write('**Occupation** : ' + str(dash_df[dash_df.index==id].OCCUPATION_TYPE.values[0]))    
+            st.markdown('')
+
+        c1, c2, c3, c4, c5 = st.columns(5)
+        with st.container(): 
+            c1.write('**Organization** : '+str(dash_df[dash_df.index==id].ORGANIZATION_TYPE.values[0]))
+            c2.write('**Employment duration** : ' + str(dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0].round())+ ' years')
+            c3.write('**Total income** : ' + str(dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0]) + ' USD')
+            # c4.write("**Loan Type** : " + str(dash_df[dash_df.index==id].NAME_CONTRACT_TYPE.values[0]))
+            # c5.write('**Loan amount** : ' + str(dash_df[dash_df.index==id].AMT_CREDIT.values[0]) + ' USD')
+        
+        pos_1, pos_2, pos_3 = st.columns(3)
+        
+        with pos_1:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                sns.kdeplot(dash_df['DAYS_BIRTH'], label = 'Age', hue=dash_df['CODE_GENDER']) #log_scale=True, 
+                plt.axvline(x=dash_df[dash_df.index==id].DAYS_BIRTH.values[0], ymax=0.95, color='firebrick', ls='--')
+                return fig            
+            st.write(plot())
+
+        with pos_2:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
+                plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], ymax=0.95, color='firebrick', ls='--')
+                return fig
+            st.write(plot())
+
+        with pos_3:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['NAME_EDUCATION_TYPE'],)
+                plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], ymax=0.95, color='firebrick', ls='--')
+                return fig
+            st.write(plot())
+
+        with pos_1:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['FLAG_OWN_CAR'],)
+                plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], ymax=0.95, color='firebrick', ls='--')
+                return fig
+            st.write(plot())
+
+        with pos_2:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                splot = sns.scatterplot(x=dash_df['DAYS_BIRTH'], y=dash_df['DAYS_EMPLOYED'], 
+                                        hue=dash_df['NAME_FAMILY_STATUS'])
+                # splot.set(xscale="log")
+                plt.scatter(x=dash_df[dash_df.index==id].DAYS_BIRTH.values[0], 
+                            y=dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0], color='firebrick')
+                return fig
+            st.write(plot())
+
+
+        with pos_3:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['DAYS_EMPLOYED'])
+                splot.set(xscale="log")
+                plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
+                            y=dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0], color='firebrick')
+                return fig
+            st.write(plot())
+
+
+        with pos_1:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['DAYS_BIRTH'], 
+                                        hue=dash_df['FLAG_OWN_CAR'])
+                splot.set(xscale="log")
+                plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
+                            y=dash_df[dash_df.index==id].DAYS_BIRTH.values[0], color='firebrick')
+                return fig
+            st.write(plot())
+
+        with pos_2:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['DAYS_BIRTH'], 
+                                        hue=dash_df['NAME_EDUCATION_TYPE'])
+                splot.set(xscale="log")
+                plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
+                            y=dash_df[dash_df.index==id].DAYS_BIRTH.values[0], color='firebrick')
+                return fig
+            st.write(plot())
+
+        with pos_3:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['NAME_EDUCATION_TYPE'])
+                splot.set(xscale="log")
+                plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
+                            y=dash_df[dash_df.index==id].NAME_EDUCATION_TYPE.values[0], color='firebrick')
+                return fig
+            st.write(plot())
+
+
+
+    chk_loan = st.checkbox("Show Customer Loan Informations ?")
+
+    if chk_loan:
+
+        c1, c2,  = st.columns(2)
+        with st.container(): 
+            c1.write("**Loan Type** : " + str(dash_df[dash_df.index==id].NAME_CONTRACT_TYPE.values[0]))
+            c2.write('**Loan amount** : ' + str(dash_df[dash_df.index==id].AMT_CREDIT.values[0]) + ' USD')
+
+        pos_1, pos_2, pos_3 = st.columns(3)
+        
+        with pos_1:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                sns.kdeplot(dash_df['AMT_CREDIT'], label = 'Loan amount', log_scale=True, hue=dash_df['NAME_CONTRACT_TYPE'])
+                plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0], ymax=0.95, color='firebrick', ls='--')
+                return fig
+            st.write(plot())
+
+        with pos_2:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                splot = sns.scatterplot(y=dash_df['AMT_INCOME_TOTAL'], x=dash_df['AMT_CREDIT'])
+                splot.set(xscale="log", yscale="log")
+                plt.scatter(y=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
+                            x=dash_df[dash_df.index==id].AMT_CREDIT.values[0], color='firebrick')
+                return fig
+            st.write(plot())
+
+        with pos_3:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                sns.kdeplot(dash_df['AMT_CREDIT'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
+                plt.axvline(x=dash_df[dash_df.index==id].AMT_CREDIT.values[0], ymax=0.95, color='firebrick', ls='--')
+                return fig
+            st.write(plot())
+
+        with pos_1:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                splot = sns.scatterplot(y=dash_df['DAYS_BIRTH'], x=dash_df['AMT_CREDIT'])
+                splot.set(xscale="log",)
+                plt.scatter(y=dash_df[dash_df.index==id].DAYS_BIRTH.values[0], 
+                            x=dash_df[dash_df.index==id].AMT_CREDIT.values[0], color='firebrick')
+                return fig
+            st.write(plot())
+
+        with pos_2:
+            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            def plot():                
+                fig, ax = plt.subplots()
+                splot = sns.scatterplot(y=dash_df['DAYS_EMPLOYED'], x=dash_df['AMT_CREDIT'])
+                splot.set(xscale="log",)
+                plt.scatter(y=dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0], 
+                            x=dash_df[dash_df.index==id].AMT_CREDIT.values[0], color='firebrick')
+                return fig
+            st.write(plot())
+
+
+###########################################################################################################################    
 ###########################################################################################################################
 with intrepretation:
     st.markdown('***')    
