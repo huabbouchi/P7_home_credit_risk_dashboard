@@ -195,43 +195,43 @@ with descriptive:
         pos_1, pos_2, pos_3 = st.columns(3)
         
         with pos_1:
-            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            @st.cache(allow_output_mutation=True)
             def plot():                
                 fig, ax = plt.subplots()
                 sns.kdeplot(dash_df['DAYS_BIRTH'], label = 'Age', hue=dash_df['CODE_GENDER']) #log_scale=True, 
                 plt.axvline(x=dash_df[dash_df.index==id].DAYS_BIRTH.values[0], ymax=0.95, color='firebrick', ls='--')
                 return fig            
-            st.write(plot())
+            st.pyplot(plot())
 
         with pos_2:
-            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            @st.cache(allow_output_mutation=True)
             def plot():                
                 fig, ax = plt.subplots()
                 sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['FLAG_OWN_REALTY'],)
                 plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], ymax=0.95, color='firebrick', ls='--')
                 return fig
-            st.write(plot())
+            st.pyplot(plot())
 
         with pos_3:
-            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            @st.cache(allow_output_mutation=True)
             def plot():                
                 fig, ax = plt.subplots()
                 sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['NAME_EDUCATION_TYPE'],)
                 plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], ymax=0.95, color='firebrick', ls='--')
                 return fig
-            st.write(plot())
+            st.pyplot(plot())
 
         with pos_1:
-            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            @st.cache(allow_output_mutation=True)
             def plot():                
                 fig, ax = plt.subplots()
                 sns.kdeplot(dash_df['AMT_INCOME_TOTAL'], log_scale=True, hue=dash_df['FLAG_OWN_CAR'],)
                 plt.axvline(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], ymax=0.95, color='firebrick', ls='--')
                 return fig
-            st.write(plot())
+            st.pyplot(plot())
 
         with pos_2:
-            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            @st.cache(allow_output_mutation=True)
             def plot():                
                 fig, ax = plt.subplots()
                 splot = sns.scatterplot(x=dash_df['DAYS_BIRTH'], y=dash_df['DAYS_EMPLOYED'], 
@@ -240,11 +240,11 @@ with descriptive:
                 plt.scatter(x=dash_df[dash_df.index==id].DAYS_BIRTH.values[0], 
                             y=dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0], color='firebrick')
                 return fig
-            st.write(plot())
+            st.pyplot(plot())
 
 
         with pos_3:
-            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            @st.cache(allow_output_mutation=True)
             def plot():                
                 fig, ax = plt.subplots()
                 splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['DAYS_EMPLOYED'])
@@ -252,11 +252,11 @@ with descriptive:
                 plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
                             y=dash_df[dash_df.index==id].DAYS_EMPLOYED.values[0], color='firebrick')
                 return fig
-            st.write(plot())
+            st.pyplot(plot())
 
 
         with pos_1:
-            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            @st.cache(allow_output_mutation=True)
             def plot():                
                 fig, ax = plt.subplots()
                 splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['DAYS_BIRTH'], 
@@ -265,10 +265,10 @@ with descriptive:
                 plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
                             y=dash_df[dash_df.index==id].DAYS_BIRTH.values[0], color='firebrick')
                 return fig
-            st.write(plot())
+            st.pyplot(plot())
 
         with pos_2:
-            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            @st.cache(allow_output_mutation=True)
             def plot():                
                 fig, ax = plt.subplots()
                 splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['DAYS_BIRTH'], 
@@ -277,10 +277,10 @@ with descriptive:
                 plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
                             y=dash_df[dash_df.index==id].DAYS_BIRTH.values[0], color='firebrick')
                 return fig
-            st.write(plot())
+            st.pyplot(plot())
 
         with pos_3:
-            @st.cache(hash_funcs={matplotlib.figure.Figure: lambda _: None})
+            @st.cache(allow_output_mutation=True)
             def plot():                
                 fig, ax = plt.subplots()
                 splot = sns.scatterplot(x=dash_df['AMT_INCOME_TOTAL'], y=dash_df['NAME_EDUCATION_TYPE'])
@@ -288,7 +288,7 @@ with descriptive:
                 plt.scatter(x=dash_df[dash_df.index==id].AMT_INCOME_TOTAL.values[0], 
                             y=dash_df[dash_df.index==id].NAME_EDUCATION_TYPE.values[0], color='firebrick')
                 return fig
-            st.write(plot())
+            st.pyplot(plot())
 
 
 
